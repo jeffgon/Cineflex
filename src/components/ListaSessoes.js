@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export default function ListaSessoes({ sessoes }) {
   console.log(sessoes);
+
+  if (sessoes === undefined) {
+    return <div>Carregando...</div>;
+  }
   return (
     <>
       <HorarioContainer>
