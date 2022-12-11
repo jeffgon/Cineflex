@@ -1,10 +1,34 @@
 import styled from "styled-components";
 import ListaAssento from "./ListaAssentos";
-
 import Bolinhas from "./BolinhasContainer";
 import ContainerPosterSelecionado from "./ContainerPosterFIlme";
+import { Form, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Formulario from "./Formulario";
 
-export default function Assentos() {
+export default function Assentos({
+  assentos,
+  setAssentos,
+  assentoSelecionados,
+  setAssentoSelecionados,
+  sessoes,
+  nome,
+  setNome,
+  cpf,
+  setCpf,
+}) {
+  const { idSessao } = useParams();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`;
+    const promise = axios.get(URL);
+    promise.then((res) => setAssentos(res.data));
+    promise.catch((err) => console.log(err.response.data));
+  }, []);
+
   return (
     <>
       <TituloParaSelecionar>
@@ -12,30 +36,28 @@ export default function Assentos() {
       </TituloParaSelecionar>
 
       <AssentosContainer>
-        <ListaAssento />
+        <ListaAssento
+          assentos={assentos}
+          setAssentos={setAssentos}
+          assentoSelecionados={assentoSelecionados}
+          setAssentoSelecionados={setAssentoSelecionados}
+        />
       </AssentosContainer>
 
       <ContainerBolinhas>
         <Bolinhas />
       </ContainerBolinhas>
 
-      <Formulario>
-        <div>
-          <p>Nome do comprador:</p>
-          <input placeholder="Digite seu nome..." />
-        </div>
-        <div>
-          <p>CPF do comprador:</p>
-          <input placeholder="Digite seu CPF..." />
-        </div>
-      </Formulario>
-
-      <BotaoReservarAssento>
-        <p>Reservar assento(s)</p>
-      </BotaoReservarAssento>
+      <Formulario
+        nome={nome}
+        setNome={setNome}
+        cpf={cpf}
+        setCpf={setCpf}
+        assentoSelecionados={assentoSelecionados}
+      />
 
       <FilmeSelecionado>
-        <ContainerPosterSelecionado />
+        <ContainerPosterSelecionado sessoes={sessoes} />
       </FilmeSelecionado>
     </>
   );
@@ -58,10 +80,10 @@ const TituloParaSelecionar = styled.div`
 
 const AssentosContainer = styled.div`
   width: 70%;
-  height: 110px;
   margin-left: 15%;
   margin-right: 20%;
   flex-wrap: wrap;
+  display: flex;
 `;
 
 const FilmeSelecionado = styled.div`
@@ -80,43 +102,5 @@ const ContainerBolinhas = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Formulario = styled.div`
-  width: 70%;
-  height: 110px;
-  margin-left: 15%;
-  margin-right: 20%;
-  p {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    margin-top: 15px;
-  }
-  input {
-    width: 327px;
-    height: 51px;
-    border: 1px solid #d5d5d5;
-    border-radius: 3px;
-    margin-top: 5px;
-    &::placeholder {
-      font-style: italic;
-    }
-  }
-`;
-
-const BotaoReservarAssento = styled.div`
-  width: 225px;
-  height: 42px;
-  margin-top: 110px;
-  margin-left: 25%;
-  margin-right: 20%;
-  background-color: #e8833a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 18px;
-  border-radius: 3px;
+  flex-wrap: wrap;
 `;

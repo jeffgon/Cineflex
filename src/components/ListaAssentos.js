@@ -1,18 +1,43 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import ItemAssento from "./ItemAssento";
 
-export default function ListaAssento() {
+export default function ListaAssento({
+  assentos,
+  assentoSelecionados,
+  setAssentoSelecionados,
+}) {
+  function estaSelecionado(assento) {
+    return assentoSelecionados.includes(assento.name);
+  }
+
+  function adicionarAssento(assento) {
+    setAssentoSelecionados([...assentoSelecionados, assento.name]);
+  }
+
+  function removerAssento(assentoRemovido) {
+    setAssentoSelecionados(
+      assentoSelecionados.filter((assento) => assento !== assentoRemovido.name)
+    );
+  }
+
   return (
-    <ItemAssento>01</ItemAssento>
-  )
+    <>
+      {assentos?.seats.map((a) => (
+        <LinkPersonalizado key={a.id}>
+          <ItemAssento
+            assento={a}
+            estaSelecionado={estaSelecionado}
+            adicionarAssento={adicionarAssento}
+            removerAssento={removerAssento}
+          />
+        </LinkPersonalizado>
+      ))}
+    </>
+  );
 }
 
-const ItemAssento = styled.div`
-  width: 26px;
-  height: 26px;
-  background-color: #c3cfd9;
-  border: 1px solid #808f9d;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const LinkPersonalizado = styled(Link)`
+  text-decoration: none;
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function ListaSessoes({ sessoes }) {
   console.log(sessoes);
@@ -16,7 +17,9 @@ export default function ListaSessoes({ sessoes }) {
             </Dia>
             <ContainerBotao>
               {s.showtimes.map((h) => (
-                <Botao key={h.id}>{h.name}</Botao>
+                <LinkPersonalizado key={h.id} to={`/assentos/${h.id}`}>
+                  <Botao>{h.name}</Botao>
+                </LinkPersonalizado>
               ))}
             </ContainerBotao>
           </div>
@@ -56,3 +59,6 @@ const Dia = styled.p`
   font-size: 20px;
   margin-top: 10px;
 `;
+const LinkPersonalizado = styled(Link)`
+  text-decoration: none;
+`

@@ -1,27 +1,49 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-export default function ItemFinalizado() {
+export default function ItemFinalizado({
+  nome,
+  cpf,
+  filmes,
+  sessoes,
+  assentoSelecionados,
+  setNome,
+  setCpf,
+  setFilmes,
+  setSessoes
+}) {
+
+  const navigate = useNavigate();
+
+  function voltarHome(){
+    navigate("/")
+    setNome("")
+    setCpf("")
+    setFilmes("")
+    setSessoes("")
+  }
+
+  console.log(sessoes?.days);
   return (
     <>
       <Item>
         <p>Filme e sessão</p>
-        <h1>Enola Holmes</h1>
-        <h2>24/06/2021 15:00</h2>
+        <h1>{sessoes?.title}</h1>
+        {/* <h2>{sessoes.days.date} - 15:00</h2> */}
       </Item>
       <Item>
         <p>Ingresso</p>
-        <h1>Assento 15</h1>
-        <h2>Assento 16</h2>
+        {assentoSelecionados.map((a) => <h1>Assento {a}</h1>)}
+        
       </Item>
       <Item>
         <p>Comprador</p>
-        <h1>Nome: João da Silva Sauro</h1>
-        <h2>CPF: 123.456.789-10</h2>
+        <h1>Nome: {nome}</h1>
+        <h2>CPF: {cpf}</h2>
       </Item>
       <CentralizarBotao>
-      <BotaoHome>Voltar pra home</BotaoHome>
+        <BotaoHome onClick={voltarHome}>Voltar pra home</BotaoHome>
       </CentralizarBotao>
-      
     </>
   );
 }
@@ -52,16 +74,16 @@ const Item = styled.div`
 `;
 
 const CentralizarBotao = styled.div`
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+`;
 
 const BotaoHome = styled.div`
   width: 225px;
   height: 42px;
-  background-color: #E8833A;
+  background-color: #e8833a;
   border-radius: 3px;
   color: white;
   display: flex;
@@ -69,5 +91,4 @@ const BotaoHome = styled.div`
   align-items: center;
   margin-left: 25%;
   margin-right: 25%;
-
 `;
