@@ -34,6 +34,7 @@ export default function Formulario({
           placeholder="Digite seu nome..."
           value={nome}
           onChange={(e) => setNome(e.target.value)}
+          data-test="client-name"
         />
       </div>
       <div>
@@ -44,9 +45,10 @@ export default function Formulario({
           placeholder="Digite seu CPF..."
           value={cpf}
           onChange={(e) => setCpf(e.target.value)}
+          data-test="client-cpf"
         />
       </div>
-      <BotaoReservarAssento type="submit">
+      <BotaoReservarAssento type="submit" data-test="book-seat-btn">
         <p>Reservar assento(s)</p>
       </BotaoReservarAssento>
     </FormularioContainer>

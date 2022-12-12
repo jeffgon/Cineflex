@@ -4,7 +4,7 @@ import PosterFoto from "../assets/image 3.png";
 
 export default function ContainerPosterSelecionado({ sessoes }) {
     return (
-        <PosterFilme>
+        <PosterFilme data-test="footer">
           <img src={sessoes?.posterURL} alt={"poster do filme"} />
           <p>{sessoes?.title}</p>
         </PosterFilme>

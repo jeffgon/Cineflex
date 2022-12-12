@@ -26,22 +26,21 @@ export default function ItemFinalizado({
   console.log(sessoes?.days);
   return (
     <>
-      <Item>
+      <Item data-test="movie-info">
         <p>Filme e sessão</p>
         <h1>{sessoes?.title}</h1>
         {/* <h2>{sessoes.days.date} - 15:00</h2> */}
       </Item>
-      <Item>
+      <Item data-test="seats-info">
         <p>Ingresso</p>
-        {assentoSelecionados.map((a) => <h1>Assento {a}</h1>)}
-        
+        {assentoSelecionados.map((a) => <h1 key={a}>Assento {a}</h1>)}       
       </Item>
-      <Item>
+      <Item data-test="client-info">
         <p>Comprador</p>
         <h1>Nome: {nome}</h1>
         <h2>CPF: {cpf}</h2>
       </Item>
-      <CentralizarBotao>
+      <CentralizarBotao data-test="go-home-btn">
         <BotaoHome onClick={voltarHome}>Voltar pra home</BotaoHome>
       </CentralizarBotao>
     </>

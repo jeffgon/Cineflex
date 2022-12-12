@@ -21,7 +21,7 @@ export default function ListaFilmes({ filmes, setFilmes }) {
     <>
       <FilmesContainer>
         {filmes.map((f) => (
-          <Link to={`/sessoes/${f.id}`} key={f.id}>
+          <Link to={`/sessoes/${f.id}`} key={f.id} data-test="movie">
             <img src={f.posterURL} alt="poster do filme" />
           </Link>
         ))}

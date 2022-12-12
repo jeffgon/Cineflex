@@ -26,7 +26,7 @@ export default function ItemAssento({
   }
 
   return (
-    <ItemAssentoContainer onClick={() => lidarCliqueAssento(assento)} cor={cor}>
+    <ItemAssentoContainer onClick={() => lidarCliqueAssento(assento)} cor={cor} data-test="seat">
       {name}
     </ItemAssentoContainer>
   );

@@ -11,13 +11,13 @@ export default function ListaSessoes({ sessoes }) {
     <>
       <HorarioContainer>
         {sessoes?.days.map((s) => (
-          <div key={s.id}>
+          <div key={s.id} data-test="movie-day">
             <Dia>
               {s.weekday} - {s.date}
             </Dia>
             <ContainerBotao>
               {s.showtimes.map((h) => (
-                <LinkPersonalizado key={h.id} to={`/assentos/${h.id}`}>
+                <LinkPersonalizado key={h.id} to={`/assentos/${h.id}`} data-test="showtime">
                   <Botao>{h.name}</Botao>
                 </LinkPersonalizado>
               ))}
